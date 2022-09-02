@@ -17,7 +17,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     TopicsModule,
     RepliesModule,
     SavedTopicsModule,
-    AuthModule
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

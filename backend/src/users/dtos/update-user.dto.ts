@@ -1,4 +1,13 @@
-import { ArrayMaxSize, IsArray, IsEmail, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -13,19 +22,19 @@ export class UpdateUserDto {
   @IsString()
   @IsEmail()
   @MaxLength(50)
-  email: string
+  email: string;
 
   @IsOptional()
   @IsNotEmpty()
   @IsString()
-  @MaxLength(50)
+  @MaxLength(500)
   @MinLength(4)
-  password: string
+  password: string;
 
   @IsOptional()
   @IsNotEmpty()
   @IsArray()
   @IsString({ each: true })
   @ArrayMaxSize(20)
-  role: string[]
+  role: string[];
 }

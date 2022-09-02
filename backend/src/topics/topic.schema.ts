@@ -5,7 +5,10 @@ export type TopicDocument = Topic & Document;
 
 @Schema()
 export class Topic {
-  @Prop({ required: true, unique: true })
+  @Prop({
+    required: true,
+    unique: true,
+  })
   title: string;
 
   @Prop({ required: true })
