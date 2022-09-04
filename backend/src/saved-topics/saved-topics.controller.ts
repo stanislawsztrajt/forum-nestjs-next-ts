@@ -8,10 +8,11 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { AuthenticationGuard } from 'src/auth/guards/authentication.guard';
 import { OwnerGuard } from 'src/auth/guards/owner.guard';
 import { CreateSavedTopicDto } from './dtos/create-saved-topic.dto';
 import { SavedTopic } from './saved-topic.schema';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Topic } from 'src/topics/topic.schema';
 
 @Controller('saved-topics')
 export class SavedTopicsController {
@@ -22,7 +23,12 @@ export class SavedTopicsController {
     return await this.savedTopicsService.findAll();
   }
 
-  @UseGuards(AuthenticationGuard)
+  @Get('user/:id')
+  async getUserSavedTopics(@Param('id') id: string): Promise<Topic[]> {
+    return await this.savedTopicsService.findAllUserSavedTopics(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(
     @Body() createSavedTopicDto: CreateSavedTopicDto,
@@ -30,8 +36,8 @@ export class SavedTopicsController {
     return await this.savedTopicsService.create(createSavedTopicDto);
   }
 
-  @UseGuards(AuthenticationGuard)
   @UseGuards(OwnerGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<SavedTopic> {
     return this.savedTopicsService.delete(id);

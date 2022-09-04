@@ -8,7 +8,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { AuthenticationGuard } from 'src/auth/guards/authentication.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { OwnerGuard } from 'src/auth/guards/owner.guard';
 import { CreateReplyDto } from './dtos/create-topic.dto';
 import { UpdateReplyDto } from './dtos/update-topic.dto';
@@ -24,19 +24,24 @@ export class RepliesController {
     return await this.repliesService.findAll();
   }
 
+  @Get('user/:id')
+  async getUserSavedTopics(@Param('id') id: string): Promise<Reply[]> {
+    return await this.repliesService.findAllByQuery({ ownerId: { $eq: id } });
+  }
+
   @Get(':id')
   async getOneById(@Param('id') id: string): Promise<Reply> {
     return await this.repliesService.findOneById(id);
   }
 
-  @UseGuards(AuthenticationGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createReplyDto: CreateReplyDto): Promise<Reply> {
     return await this.repliesService.create(createReplyDto);
   }
 
-  @UseGuards(AuthenticationGuard)
   @UseGuards(OwnerGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -45,8 +50,8 @@ export class RepliesController {
     return this.repliesService.update(id, updateReplyDto);
   }
 
-  @UseGuards(AuthenticationGuard)
   @UseGuards(OwnerGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Reply> {
     return this.repliesService.delete(id);

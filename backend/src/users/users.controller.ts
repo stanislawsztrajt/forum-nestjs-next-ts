@@ -10,7 +10,7 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { AuthenticationGuard } from 'src/auth/guards/authentication.guard';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { OwnerUserGuard } from './guards/owner-user.guard';
@@ -31,13 +31,13 @@ export class UsersController {
 
   @Get(':id')
   async getById(@Param('id') id: string): Promise<SerializedUser> {
-    const user = await this.usersService.findById(id)
+    const user = await this.usersService.findById(id);
     return new SerializedUser(user);
   }
 
   @Get('/email/:email')
   async getByEmail(@Param('email') email: string): Promise<SerializedUser> {
-    const user = await this.usersService.findByEmail(email)
+    const user = await this.usersService.findByEmail(email);
     return new SerializedUser(user);
   }
 
@@ -49,7 +49,7 @@ export class UsersController {
 
   @UseGuards(UpdateRolesGuard)
   @UseGuards(OwnerUserGuard)
-  @UseGuards(AuthenticationGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -60,10 +60,10 @@ export class UsersController {
   }
 
   @UseGuards(OwnerUserGuard)
-  @UseGuards(AuthenticationGuard)
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<SerializedUser> {
-    const user = await this.usersService.delete(id)
+    const user = await this.usersService.delete(id);
     return new SerializedUser(user);
   }
 }

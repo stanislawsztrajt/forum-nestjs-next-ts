@@ -6,9 +6,11 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Types } from 'mongoose';
 import { Observable } from 'rxjs';
 import { Iuser } from 'src/users/types';
-import { parseJwt } from 'src/utils/helpers';
+import { checkIsUserIsAdmin, parseJwt } from 'src/utils/helpers';
+import { findOneByCollectionName } from 'src/utils/helpers/mongoose';
 import { Irequest, IrequestBodyId } from 'src/utils/types';
 
 @Injectable()
@@ -18,17 +20,32 @@ export class OwnerGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const { body, headers }: Irequest<IrequestBodyId> = context
+    const { headers, url }: Irequest<IrequestBodyId> = context
       .switchToHttp()
       .getRequest();
     const token: string = parseJwt(headers.authorization);
-    const user: Iuser = this.jwtService.verify(token);
-    const isAdmin: boolean = user.roles
-      .map((role) => role.toLowerCase())
-      .includes('admin');
+    const user: Iuser = this.jwtService.verify(token, { secret: process.env.JWT_SECRET });
+    const isUserIsAdmin: boolean = checkIsUserIsAdmin(user.roles);
 
-    if (user._id !== body.ownerId && !isAdmin) {
-      throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    // catching data about collection name(index 0) and collection id(index 1) from url
+    // from /api/:colletion/:id
+    // to [':colletion', ':id']
+    const collectionData = url.split('/').slice(2, 4);
+    const collection = findOneByCollectionName(
+      collectionData[0].replace('-', ''),
+      {
+        _id: {
+          $eq: new Types.ObjectId(collectionData[1]),
+        },
+        ownerId: {
+          $eq: user._id,
+        },
+      },
+    );
+
+    // if a collection does not exist, a user is not an owner
+    if (!collection && !isUserIsAdmin) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     return true;

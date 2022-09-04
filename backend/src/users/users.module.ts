@@ -8,7 +8,7 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './user.schema';
-import { HashPassword } from './middlewares/bcrypt.middleware';
+import { HashPassword } from './middlewares/hash-password.middleware';
 import { SetCreatedAtMiddleware } from 'src/middlewares/set-created-at-date.middleware';
 import { JwtService } from '@nestjs/jwt';
 import { SetDefaultRoleMiddleware } from './middlewares/set-default-role.middleware';
@@ -31,6 +31,6 @@ export class UsersModule implements NestModule {
       .forRoutes(
         { path: 'users', method: RequestMethod.POST },
         { path: 'users/:id', method: RequestMethod.PATCH },
-      )
+      );
   }
 }

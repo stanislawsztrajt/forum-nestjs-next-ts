@@ -7,11 +7,13 @@ import { JwtService } from '@nestjs/jwt';
 import { SetCreatedAtMiddleware } from 'src/middlewares/set-created-at-date.middleware';
 import { SetUpdatedAtMiddleware } from 'src/middlewares/set-updated-at-date.middleware';
 import { SetOwnerIdMiddleware } from 'src/middlewares/set-owner-id.middleware';
+import { Topic, TopicSchema } from 'src/topics/topic.schema';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: SavedTopic.name, schema: SavedTopicSchema },
+      { name: Topic.name, schema: TopicSchema },
     ]),
   ],
   controllers: [SavedTopicsController],

@@ -14,10 +14,11 @@ export class AuthService {
   ) {}
 
   async validateUser({ email, password }: LoginDto) {
-    const payload: User = await this.usersService.findByEmail(email);
+    const payload: User | null = await this.usersService.findByEmail(email);
+
     const encryptedPassword: boolean = bcrypt.compareSync(
       password,
-      payload.password,
+      payload ? payload.password : '',
     );
 
     if (!payload || !encryptedPassword) {

@@ -11,7 +11,9 @@ export class SetOwnerIdMiddleware implements NestMiddleware {
 
   use(req: Irequest<IrequestBodyId>, res: Response, next: NextFunction) {
     const token: string = parseJwt(req.headers.authorization);
-    const { _id }: Iuser = this.jwtService.verify(token);
+    const { _id }: Iuser = this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
     req.body.ownerId = _id;
 
     next();

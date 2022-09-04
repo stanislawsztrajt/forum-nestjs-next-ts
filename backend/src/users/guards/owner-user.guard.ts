@@ -1,26 +1,43 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  CanActivate,
+  ExecutionContext,
+  HttpException,
+  HttpStatus,
+  Injectable,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Observable } from 'rxjs';
-import { parseJwt } from 'src/utils/helpers';
+import { checkIsUserIsAdmin, parseJwt } from 'src/utils/helpers';
 import { Irequest } from 'src/utils/types';
 import { Iuser } from '../types';
+import { User, UserDocument } from '../user.schema';
 
 @Injectable()
 export class OwnerUserGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<UserDocument>,
+    private jwtService: JwtService,
+  ) {}
 
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const { body, headers }: Irequest<Iuser> = context
+    const { headers, params }: Irequest<Iuser> = context
       .switchToHttp()
       .getRequest();
-    console.log(1);
+
     const token: string = parseJwt(headers.authorization);
-    const user: Iuser = this.jwtService.verify(token);
+    const user: Iuser = this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
+    const isUserIsAdmin: boolean = checkIsUserIsAdmin(user.roles);
 
-    if (user._id === body._id) return true;
+    if (user._id !== params?.id && isUserIsAdmin) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
 
-    return false;
+    return true;
   }
 }

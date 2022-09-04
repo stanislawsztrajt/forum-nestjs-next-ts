@@ -1,16 +1,15 @@
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 export const parseResponse: (res: any) => any = (res) => {
   return JSON.parse(JSON.stringify(res));
 };
 
 export const parseJwt: (jwt: string) => string = (jwt) => {
-  console.log(jwt.includes(process.env.JWT_SECRET))
-  if (!jwt || !jwt.includes(process.env.JWT_SECRET)) {
-    throw new HttpException('FORBIDDEN', HttpStatus.FORBIDDEN);
+  try {
+    return jwt.split(' ')[1];
+  } catch {
+    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
-
-  return jwt.split(' ')[1]
 };
 
 export const checkIsUserIsAdmin: (roles: string[]) => boolean = (roles) => {

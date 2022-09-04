@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
-import { checkIsUserIsAdmin } from 'src/utils/helpers';
+import { checkIsUserIsAdmin, parseJwt } from 'src/utils/helpers';
 import { Irequest } from 'src/utils/types';
 import { Iuser } from '../types';
 
@@ -18,11 +18,19 @@ export class UpdateRolesGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
-    const { body }: Irequest<Iuser> = context.switchToHttp().getRequest();
-    console.log(2);
+    const { body, headers }: Irequest<Iuser> = context
+      .switchToHttp()
+      .getRequest();
 
-    if (body.roles && checkIsUserIsAdmin(body.roles)) return true;
-    if (body.roles) throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+    const token: string = parseJwt(headers.authorization);
+    const user: Iuser = this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
+    const isUserIsAdmin: boolean = checkIsUserIsAdmin(user.roles);
+
+    if (!isUserIsAdmin && body.roles) {
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
+    }
 
     return true;
   }
