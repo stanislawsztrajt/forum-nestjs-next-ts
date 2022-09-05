@@ -25,7 +25,7 @@ export class RepliesController {
   }
 
   @Get('user/:id')
-  async getUserSavedTopics(@Param('id') id: string): Promise<Reply[]> {
+  async getUserReplies(@Param('id') id: string): Promise<Reply[]> {
     return await this.repliesService.findAllByQuery({ ownerId: { $eq: id } });
   }
 

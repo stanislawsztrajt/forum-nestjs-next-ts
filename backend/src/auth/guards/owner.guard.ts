@@ -24,7 +24,9 @@ export class OwnerGuard implements CanActivate {
       .switchToHttp()
       .getRequest();
     const token: string = parseJwt(headers.authorization);
-    const user: Iuser = this.jwtService.verify(token, { secret: process.env.JWT_SECRET });
+    const user: Iuser = this.jwtService.verify(token, {
+      secret: process.env.JWT_SECRET,
+    });
     const isUserIsAdmin: boolean = checkIsUserIsAdmin(user.roles);
 
     // catching data about collection name(index 0) and collection id(index 1) from url
