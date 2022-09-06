@@ -7,3 +7,12 @@
 body {
   font-family: poppins, sans-serif, monospace;
 }
+
+.button {
+  @apply px-10 pt-2 pb-1 font-normal text-black duration-100 bg-white rounded-full border border-gray-800 text-lg hover:border-indigo-600 hover:text-indigo-600
+}
+
+.button-bg {
+  @apply px-10 pt-2 pb-1 font-normal text-white duration-100 text-lg bg-indigo-500 rounded-full hover:bg-indigo-600
+}
+

@@ -13,6 +13,7 @@ import { OwnerGuard } from 'src/auth/guards/owner.guard';
 import { Reply } from 'src/replies/reply.schema';
 import { CreateTopicDto } from './dtos/create-topic.dto';
 import { UpdateTopicDto } from './dtos/update-topic.dto';
+import { SearchValueDto } from './dtos/search-value.dto';
 import { Topic } from './topic.schema';
 import { TopicsService } from './topics.service';
 
@@ -23,6 +24,27 @@ export class TopicsController {
   @Get()
   async getAll(): Promise<Topic[]> {
     return await this.topicsService.findAll();
+  }
+
+  @Post('search-by-value')
+  async getAllBySearchValue(@Body() { value }: SearchValueDto): Promise<Topic[]> {
+    return await this.topicsService.findAllByQuery({
+      $or: [
+        {
+          title: {
+            $regex: value
+          }
+        },
+        {
+          body: {
+            $regex: value
+          }}
+      ]});
+  }
+
+  @Get('examples')
+  async getAllExamples(): Promise<Topic[]> {
+    return await this.topicsService.findAllExamples();
   }
 
   @Get('user/:id')

@@ -17,6 +17,10 @@ export class TopicsService {
     return await this.topicModel.find();
   }
 
+  async findAllExamples(): Promise<Topic[]> {
+    return await this.topicModel.find().limit(10);
+  }
+
   async findAllByQuery(query: FilterQuery<Topic>): Promise<Topic[]> {
     return await this.topicModel.find(query);
   }
