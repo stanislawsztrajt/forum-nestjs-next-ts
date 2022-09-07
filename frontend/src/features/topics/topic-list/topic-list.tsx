@@ -8,8 +8,17 @@ interface Props {
 
 const TopicList: FC<Props> = ({ topics }) => {
   const topicList = topics.map(topic => <TopicItem key={topic._id} topic={topic}/>)
-  return <>{ topicList }</>
+  return(
+    <>
+      { topics.length > 0 ? (
+        <>
+          { topicList }
+        </>
+      ) : (
+        <>No results {':('}</>
+      ) }
+    </>
+  )
 }
 
 export default TopicList
-  

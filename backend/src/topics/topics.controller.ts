@@ -32,12 +32,14 @@ export class TopicsController {
       $or: [
         {
           title: {
-            $regex: value
+            $regex: value,
+            $options: "i"
           }
         },
         {
           body: {
-            $regex: value
+            $regex: value, 
+            $options: "i"
           }}
       ]});
   }

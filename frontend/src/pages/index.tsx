@@ -40,17 +40,12 @@ const Home: NextPage<Props> = ({ topicsData }: Props) => {
       <div className='flex flex-col items-center mt-64'>
         <h2 className='mb-4 text-6xl'>Example topics</h2>
         <TopicsSearchInput setLoading={setLoading} setTopics={setTopics} />
+        
         <div className='mt-12'></div>
         { loading ? (
           <Loading />
         ) : (
-          <>
-          { topics.length > 0 ? (
-            <TopicList topics={topics} />
-          ) : (
-            <>No results {':('}</>
-          ) }
-          </>
+          <TopicList topics={topics} />
         ) }
         
       </div>
