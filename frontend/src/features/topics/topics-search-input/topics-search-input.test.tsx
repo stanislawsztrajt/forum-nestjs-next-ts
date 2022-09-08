@@ -7,4 +7,3 @@ test('should render TopicsSearchInput', () => {
 
   expect(getByText('')).toBe('');
 });
-  

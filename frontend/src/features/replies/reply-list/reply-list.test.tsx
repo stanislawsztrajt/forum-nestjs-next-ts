@@ -1,9 +1,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import TopicItem from './topic-item';
+import ReplyList from './reply-list';
 
-test('should render TopicItem', () => {
-  const { getByText } = render(<TopicItem />);
+test('should render ReplyList', () => {
+  const { getByText } = render(<ReplyList />);
 
   expect(getByText('')).toBeInTheDocument();
 });

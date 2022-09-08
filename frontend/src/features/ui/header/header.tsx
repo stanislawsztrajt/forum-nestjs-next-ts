@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
-import TopicsSearchInput from 'features/topics/topics-search-input'
+import TopicsSearchInput from 'features/topics/topics-search-input';
 
 const Header: FC = () => {
   return (

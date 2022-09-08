@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@testing-library/react": "^13.4.0",
     "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
     "axios": "^0.27.2",
     "next": "12.2.5",
     "react": "18.2.0",
@@ -23,6 +24,7 @@
     "react-undraw": "^2.0.3"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.4",
     "@types/node": "18.7.13",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",

@@ -1,6 +1,5 @@
 const useTopicsSearchInput = () => {
-  return {}
-}
+  return {};
+};
 
-export default useTopicsSearchInput
-  
+export default useTopicsSearchInput;

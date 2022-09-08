@@ -1,6 +1,5 @@
 const useTopicItem = () => {
-  return {}
-}
+  return {};
+};
 
-export default useTopicItem
-  
+export default useTopicItem;

@@ -7,4 +7,3 @@ test('should render TopicList', () => {
 
   expect(getByText('')).toBeInTheDocument();
 });
-  

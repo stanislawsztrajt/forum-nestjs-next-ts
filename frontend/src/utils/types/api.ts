@@ -1,3 +1,3 @@
 export interface Iresponse<T> {
-  data: T
+  data: T;
 }

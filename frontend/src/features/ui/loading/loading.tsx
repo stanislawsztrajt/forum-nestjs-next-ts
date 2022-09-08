@@ -7,7 +7,7 @@ const Loading: FC = () => {
       <div className="w-8 h-8 bg-yellow-500 rounded-full"></div>
       <div className="w-8 h-8 bg-green-500 rounded-full"></div>
     </div>
-  )
-}
+  );
+};
 
 export default Loading;

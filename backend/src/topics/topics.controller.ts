@@ -26,22 +26,31 @@ export class TopicsController {
     return await this.topicsService.findAll();
   }
 
+  @Get('slug/:slug')
+  async getOneBySlug(@Param('slug') slug: string): Promise<Topic> {
+    return await this.topicsService.findOneByQuery({ slug: { $eq: slug } });
+  }
+
   @Post('search-by-value')
-  async getAllBySearchValue(@Body() { value }: SearchValueDto): Promise<Topic[]> {
+  async getAllBySearchValue(
+    @Body() { value }: SearchValueDto,
+  ): Promise<Topic[]> {
     return await this.topicsService.findAllByQuery({
       $or: [
         {
           title: {
             $regex: value,
-            $options: "i"
-          }
+            $options: 'i',
+          },
         },
         {
           body: {
-            $regex: value, 
-            $options: "i"
-          }}
-      ]});
+            $regex: value,
+            $options: 'i',
+          },
+        },
+      ],
+    });
   }
 
   @Get('examples')

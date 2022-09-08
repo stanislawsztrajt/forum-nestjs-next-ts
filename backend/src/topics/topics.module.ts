@@ -9,6 +9,7 @@ import { SetUpdatedAtMiddleware } from 'src/middlewares/set-updated-at-date.midd
 import { SetOwnerIdMiddleware } from 'src/middlewares/set-owner-id.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { Reply, ReplySchema } from 'src/replies/reply.schema';
+import { GenerateSlugMiddleware } from './middlewares/generate-slug.middleware';
 
 @Module({
   imports: [
@@ -32,10 +33,11 @@ export class TopicsModule {
         SetCreatedAtMiddleware,
         SetUpdatedAtMiddleware,
         SetOwnerIdMiddleware,
+        GenerateSlugMiddleware,
       )
       .forRoutes({ path: 'topics', method: RequestMethod.POST })
 
-      .apply(SetUpdatedAtMiddleware)
+      .apply(SetUpdatedAtMiddleware, GenerateSlugMiddleware)
       .forRoutes({ path: 'topics/:id', method: RequestMethod.PATCH });
   }
 }

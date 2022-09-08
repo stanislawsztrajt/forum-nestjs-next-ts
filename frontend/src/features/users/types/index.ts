@@ -8,3 +8,11 @@ export interface Iuser {
   updatedAt: Date;
   createdAt: Date;
 }
+
+export interface IpublicUser {
+  _id: string;
+  __v?: number;
+  username: string;
+  updatedAt: Date;
+  createdAt: Date;
+}

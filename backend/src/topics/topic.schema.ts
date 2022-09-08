@@ -15,6 +15,9 @@ export class Topic {
   body: string;
 
   @Prop({ required: true })
+  slug: string;
+
+  @Prop({ required: true })
   ownerId: string;
 
   @Prop({ required: true })

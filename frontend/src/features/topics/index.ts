@@ -1,7 +1,6 @@
-import TopicItem from './topic-item'
-import TopicList from './topic-list'
-import TopicsSearchInput from './topics-search-input'
-import Types from './types'
+import TopicItem from './topic-item';
+import TopicList from './topic-list';
+import TopicsSearchInput from './topics-search-input';
+import Types from './types';
 
-export { TopicItem, TopicList, TopicsSearchInput, Types }
-    
+export { TopicItem, TopicList, TopicsSearchInput, Types };

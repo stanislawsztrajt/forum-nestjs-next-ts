@@ -1,1 +1,1 @@
-export { default } from "./topics-search-input"
+export { default } from './topics-search-input';
