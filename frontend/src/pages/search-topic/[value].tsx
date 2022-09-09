@@ -5,12 +5,15 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { Iresponse } from 'utils/types/api';
 import { TopicList } from 'features/topics';
+import { getUsersFromOwnersIdsAsync } from 'utils/helpers';
+import { IpublicUser } from 'features/users/types';
 
 interface Props {
   topics: Itopic[];
+  topicsOwners: IpublicUser[]
 }
 
-const SearchTopic: NextPage<Props> = ({ topics }: Props) => {
+const SearchTopic: NextPage<Props> = ({ topics, topicsOwners }: Props) => {
   const router = useRouter();
   const { value } = router.query;
 
@@ -21,7 +24,7 @@ const SearchTopic: NextPage<Props> = ({ topics }: Props) => {
         <span className="text-indigo-600">{value?.slice(1)}</span>
       </h1>
       <div className="flex flex-col items-center mt-20">
-        <TopicList topics={topics} />
+        <TopicList topics={topics} owners={topicsOwners} />
       </div>
     </main>
   );
@@ -37,9 +40,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     { value: value.slice(1) }
   );
 
+  const topicsOwners = await getUsersFromOwnersIdsAsync(data);
+
   return {
     props: {
       topics: data,
+      topicsOwners
     },
   };
 };

@@ -13,3 +13,8 @@ export const getUsersFromOwnersIdsAsync: TgetUsersFromOwnerIds = async (array) =
     })
   );
 };
+
+
+export const scrollToElementById = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
