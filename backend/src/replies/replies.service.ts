@@ -12,11 +12,11 @@ export class RepliesService {
   ) {}
 
   async findAll(): Promise<Reply[]> {
-    return await this.replyModel.find();
+    return await this.replyModel.find().sort({ _id: -1 });
   }
 
   async findAllByQuery(query: FilterQuery<Reply>): Promise<Reply[]> {
-    return await this.replyModel.find(query);
+    return await this.replyModel.find(query).sort({ _id: -1 });
   }
 
   async findOneById(id: string): Promise<Reply> {

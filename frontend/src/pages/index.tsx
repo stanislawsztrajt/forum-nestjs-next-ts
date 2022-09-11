@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import axios from 'axios';
 import Image from 'next/image';
@@ -9,7 +9,7 @@ import { Loading, Button } from 'features/ui';
 import { Iresponse } from 'utils/types/api';
 import { IpublicUser } from 'features/users/types';
 import { getUsersFromOwnersIdsAsync, scrollToElementById } from 'utils/helpers';
-import { jwt } from 'utils/constants/user';
+import useIsLoggedIn from 'features/auth/login/use-is-logged-in';
 
 interface Props {
   topicsData: Itopic[];
@@ -17,6 +17,8 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
+  const { isLoggedIn } = useIsLoggedIn()
+
   const [loading, setLoading] = useState<boolean>(false);
   const [topics, setTopics] = useState<Itopic[]>(topicsData);
 
@@ -37,16 +39,16 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
                 action={() => scrollToElementById('example-topics')}
               />
               <Button
-                text={jwt ? 'Dadhboard' : 'Login'}
+                text={isLoggedIn ? 'Dadhboard' : 'Login'}
                 className="mt-2 ml-4"
-                href={jwt ? '/dahboard' : '/auth/login'}
+                href={isLoggedIn ? '/dahboard' : '/auth/login'}
                 bg
               />
             </div>
           </div>
           <br />
           <Image
-            className="w-11/12 xl:w-1/2 animate__animated animate__fadeInRight"
+            className="w-11/12 xl:w-1/2 animate__animated animate__fa deInRight"
             src={UndrawContentCreator}
           />
         </div>

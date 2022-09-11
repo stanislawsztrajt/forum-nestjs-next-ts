@@ -19,7 +19,7 @@ const Button: FC<Props> = ({ href, className, bg, action, text }) => {
           </button>
         </Link>
       ) : (
-        <button onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
+        <button type='submit' onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
           {text}
         </button>
       )}

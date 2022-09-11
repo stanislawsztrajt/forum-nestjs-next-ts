@@ -19,3 +19,15 @@ body {
 .input-underline {
   @apply w-full px-1 py-1 text-lg border-b-2 outline-none focus:border-indigo-600 duration-100
 }
+
+.dont-break-out {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

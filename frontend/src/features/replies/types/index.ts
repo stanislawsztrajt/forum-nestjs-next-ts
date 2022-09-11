@@ -5,3 +5,7 @@ export interface Ireply {
   updatedAt: string;
   _id: string;
 }
+
+export interface IcreateReplyForm {
+  body: string;
+}

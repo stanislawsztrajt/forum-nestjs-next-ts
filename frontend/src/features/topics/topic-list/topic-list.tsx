@@ -17,7 +17,7 @@ const TopicList: FC<Props> = ({ topics, owners }) => {
       owner={owners.find((owner) => owner._id === topic.ownerId)}
     />
   ));
-  return <>{topics.length > 0 ? <>{topicList}</> : <>No results {':('}</>}</>;
+  return <>{topics.length > 0 ? <>{topicList}</> : <>No topics {':('}</>}</>;
 };
 
 export default TopicList;

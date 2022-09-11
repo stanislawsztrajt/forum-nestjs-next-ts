@@ -15,7 +15,7 @@ export class SavedTopicsService {
   ) {}
 
   async findAll(): Promise<SavedTopic[]> {
-    return await this.savedTopicModel.find();
+    return await this.savedTopicModel.find().sort({ _id: -1 });
   }
 
   async findAllUserSavedTopics(id: string) {
@@ -26,11 +26,11 @@ export class SavedTopicsService {
       (savedTopic) => new Types.ObjectId(savedTopic.topicId),
     );
 
-    return this.topicModel.find({ _id: { $in: savedTopicsIds } });
+    return this.topicModel.find({ _id: { $in: savedTopicsIds } }).sort({ _id: -1 });
   }
 
   async findAllByQuery(query: FilterQuery<SavedTopic>): Promise<SavedTopic[]> {
-    return await this.savedTopicModel.find(query);
+    return await this.savedTopicModel.find(query).sort({ _id: -1 });
   }
 
   async create(createSavedTopicDto: CreateSavedTopicDto): Promise<SavedTopic> {

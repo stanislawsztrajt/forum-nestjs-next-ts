@@ -4,9 +4,11 @@ import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import TopicsSearchInput from 'features/topics/topics-search-input';
 import { Button } from 'features/ui';
-import { jwt } from 'utils/constants/user';
+import useIsLoggedIn from 'features/auth/login/use-is-logged-in';
 
 const Header: FC = () => {
+  const { isLoggedIn } = useIsLoggedIn()
+
   return (
     <header className="flex flex-row flex-wrap items-center justify-around p-4 animate__animated animate__fadeInDown">
       <a href="/" className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
@@ -30,7 +32,7 @@ const Header: FC = () => {
       </ul>
 
       <div className="flex flex-row">
-        <Button text={jwt ? 'Dadhboard' : 'Login'} href="/auth/login" bg={true} />
+        <Button text={isLoggedIn ? 'Dadhboard' : 'Login'} href="/auth/login" bg={true} />
         <TopicsSearchInput isHeader={true} />
       </div>
     </header>

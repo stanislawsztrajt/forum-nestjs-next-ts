@@ -5,7 +5,7 @@ import React from 'react';
 import { Iresponse } from 'utils/types/api';
 import { IpublicUser } from 'features/users/types';
 import { Ireply } from 'features/replies/types';
-import { ReplyList } from 'features/replies';
+import { ReplyList, CreateReplyForm } from 'features/replies';
 import { getUsersFromOwnersIdsAsync } from 'utils/helpers';
 
 interface Props {
@@ -28,7 +28,11 @@ const Topic: NextPage<Props> = ({ topic, owner, replies, repliesOwners }: Props)
         </div>
       </section>
 
-      <section>
+      <section className='flex flex-col items-center mt-16'>
+        <CreateReplyForm topicId={topic._id} />
+      </section>
+
+      <section className='flex flex-col items-center mt-20'>
         <ReplyList replies={replies} owners={repliesOwners} />
       </section>
     </main>
@@ -50,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     `${process.env.NEXT_PUBLIC_API_URL}/topics/${topicRes.data._id}/replies`
   );
 
-  const repliesOwners = await getUsersFromOwnersIdsAsync(repliesRes.data);
+  const repliesOwners: IpublicUser[] = await getUsersFromOwnersIdsAsync(repliesRes.data);
 
   return {
     props: {

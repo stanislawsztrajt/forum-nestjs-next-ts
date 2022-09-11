@@ -14,19 +14,19 @@ export class TopicsService {
   ) {}
 
   async findAll(): Promise<Topic[]> {
-    return await this.topicModel.find();
+    return await this.topicModel.find().sort({ _id: -1 });
   }
 
   async findAllExamples(): Promise<Topic[]> {
-    return await this.topicModel.find().limit(10);
+    return await this.topicModel.find().limit(10).sort({ _id: -1 });
   }
 
   async findAllByQuery(query: FilterQuery<Topic>): Promise<Topic[]> {
-    return await this.topicModel.find(query);
+    return await this.topicModel.find(query).sort({ _id: -1 });
   }
 
   async findTopicReplies(id: string): Promise<Reply[]> {
-    return await this.replyModel.find({ topicId: { $eq: id } });
+    return await this.replyModel.find({ topicId: { $eq: id } }).sort({ _id: -1 });
   }
 
   async findOneById(id: string): Promise<Topic> {

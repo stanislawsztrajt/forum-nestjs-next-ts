@@ -17,7 +17,7 @@ const ReplyList: FC<Props> = ({ replies, owners }) => {
       owner={owners.find((owner) => owner._id === reply.ownerId)}
     />
   ));
-  return <>{replies.length > 0 ? <>{replyList}</> : <>No replies results {':('}</>}</>;
+  return <>{replies.length > 0 ? <>{replyList}</> : <>No replies {':('}</>}</>;
 };
 
 export default ReplyList;
