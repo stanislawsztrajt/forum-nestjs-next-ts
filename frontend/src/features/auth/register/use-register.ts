@@ -1,18 +1,22 @@
-import { IloginForm, IloginResponseData } from '../types';
+import { IregisterForm } from '../types';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Ierror } from 'utils/types/api';
 import { useState } from 'react';
-import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 
-const initialValues: IloginForm = {
+const initialValues: IregisterForm = {
+  username: '',
   email: '',
   password: '',
-  isRemember: false,
+  repeatedPassword: '',
 };
 
 const validationSchema = Yup.object({
+  username: Yup.string()
+    .max(50, 'Username must be shorter than 50 chars')
+    .min(4, 'Username must be longer than 4 chars')
+    .required('Required'),
   email: Yup.string()
     .max(50, 'Email must be shorter than 50 chars')
     .min(4, 'Email must be longer than 4 chars')
@@ -22,30 +26,25 @@ const validationSchema = Yup.object({
     .max(50, 'Password must be shorter than 50 chars')
     .min(4, 'Password must be longer than 4 chars')
     .required('Required'),
-  isRemember: Yup.boolean(),
+  repeatedPassword: Yup.string()
+    .max(50, 'Repeated password must be shorter than 50 chars')
+    .min(4, 'Repeated password must be longer than 4 chars')
+    .oneOf([Yup.ref('password'), null], 'Does not match with password!')
+    .required('Required'),
 });
 
 const useLogin = () => {
+  const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
-  const login = async (values: IloginForm) => {
+  const login = async (values: IregisterForm) => {
+    console.log(values);
     setLoading(true);
     try {
-      const { isRemember, ...loginValues } = values;
-      const { data }: IloginResponseData = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-        loginValues
-      );
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/users`, values);
 
-      // if the user checked "Remember me", user will not be logged out else user will be logged out after 7 days
-      const expires = isRemember ? 999999999999999 : 7;
-
-      Cookies.set('jwt', data.jwt, { expires });
-      Cookies.set('user', data.jwt, { expires });
-
-      router.push('/dashboard');
+      router.push('/auth/login');
     } catch (err) {
       const { response } = err as Ierror;
       setError(response.data.message);

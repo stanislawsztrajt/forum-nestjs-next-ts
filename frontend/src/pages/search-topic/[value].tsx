@@ -10,7 +10,7 @@ import { IpublicUser } from 'features/users/types';
 
 interface Props {
   topics: Itopic[];
-  topicsOwners: IpublicUser[]
+  topicsOwners: IpublicUser[];
 }
 
 const SearchTopic: NextPage<Props> = ({ topics, topicsOwners }: Props) => {
@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       topics: data,
-      topicsOwners
+      topicsOwners,
     },
   };
 };

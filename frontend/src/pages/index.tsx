@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import axios from 'axios';
 import Image from 'next/image';
-import Head from 'next/head';
 import UndrawContentCreator from 'assets/undraw/undraw_content_creator.svg';
 import { Itopic } from 'features/topics/types';
 import { TopicList, TopicsSearchInput } from 'features/topics';
@@ -10,6 +9,7 @@ import { Loading, Button } from 'features/ui';
 import { Iresponse } from 'utils/types/api';
 import { IpublicUser } from 'features/users/types';
 import { getUsersFromOwnersIdsAsync, scrollToElementById } from 'utils/helpers';
+import { jwt } from 'utils/constants/user';
 
 interface Props {
   topicsData: Itopic[];
@@ -22,14 +22,6 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
 
   return (
     <main>
-      <Head>
-        <title>ForumAll - forum about all</title>
-        <meta
-          name="description"
-          content="A meeting or medium where ideas and views on a topic can be exchanged and others can
-              be helped. It's all on ForumAll"
-        />
-      </Head>
       <section className="flex justify-center mt-16 xl:mt-36">
         <div className="flex flex-col items-center w-3/4 xl:flex-row">
           <div className="w-11/12 text-center xl:text-left xl:w-1/2 animate__animated animate__fadeInLeft ">
@@ -39,8 +31,17 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
               be helped. It&apos;s all on ForumAll
             </p>
             <div className="">
-              <Button text="Check example topics" className="mt-10" action={() => scrollToElementById('example-topics')} />
-              <Button text="Login" className="mt-2 ml-4" href="/auth/login" bg={true} />
+              <Button
+                text="Check example topics"
+                className="mt-10"
+                action={() => scrollToElementById('example-topics')}
+              />
+              <Button
+                text={jwt ? 'Dadhboard' : 'Login'}
+                className="mt-2 ml-4"
+                href={jwt ? '/dahboard' : '/auth/login'}
+                bg
+              />
             </div>
           </div>
           <br />
@@ -51,7 +52,7 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
         </div>
       </section>
       <section className="flex flex-col items-center mt-72">
-        <h2 data-aos="fade-left" id='example-topics' className="mb-4 text-6xl">
+        <h2 data-aos="fade-left" id="example-topics" className="mb-4 text-6xl">
           Example topics
         </h2>
         <div data-aos="fade-right">

@@ -5,7 +5,7 @@ export interface Iresponse<T> {
 export interface Ierror {
   response: {
     data: {
-      message: string
-    }
-  }
+      message: string;
+    };
+  };
 }

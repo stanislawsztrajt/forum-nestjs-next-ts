@@ -11,9 +11,19 @@ interface Props {
 
 const Button: FC<Props> = ({ href, className, bg, action, text }) => {
   return (
-    <button onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
-      {href ? <Link href={href}>{text}</Link> : text}
-    </button>
+    <>
+      {href ? (
+        <Link href={href}>
+          <button onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
+            {text}
+          </button>
+        </Link>
+      ) : (
+        <button onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
+          {text}
+        </button>
+      )}
+    </>
   );
 };
 

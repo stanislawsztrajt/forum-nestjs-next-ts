@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserAstronaut } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import TopicsSearchInput from 'features/topics/topics-search-input';
+import { Button } from 'features/ui';
+import { jwt } from 'utils/constants/user';
 
 const Header: FC = () => {
   return (
@@ -28,9 +30,7 @@ const Header: FC = () => {
       </ul>
 
       <div className="flex flex-row">
-        <button className="px-10 pt-2 pb-1 font-normal text-white duration-100 bg-indigo-500 rounded-full hover:bg-indigo-600">
-          Login
-        </button>
+        <Button text={jwt ? 'Dadhboard' : 'Login'} href="/auth/login" bg={true} />
         <TopicsSearchInput isHeader={true} />
       </div>
     </header>

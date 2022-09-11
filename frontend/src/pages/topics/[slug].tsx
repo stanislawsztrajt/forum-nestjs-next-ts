@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   );
 
   const repliesOwners = await getUsersFromOwnersIdsAsync(repliesRes.data);
-  
+
   return {
     props: {
       topic: topicRes.data,

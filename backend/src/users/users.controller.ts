@@ -15,6 +15,7 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { OwnerUserGuard } from './guards/owner-user.guard';
 import { UpdateRolesGuard } from './guards/update-roles.guard';
+import { UserUniqueGuard } from './guards/user-unique.guard';
 import { SerializedUser } from './types';
 import { UsersService } from './users.service';
 
@@ -41,12 +42,14 @@ export class UsersController {
     return new SerializedUser(user);
   }
 
+  @UseGuards(UserUniqueGuard)
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<SerializedUser> {
     const user = await this.usersService.create(createUserDto);
     return new SerializedUser(user);
   }
 
+  @UseGuards(UserUniqueGuard)
   @UseGuards(UpdateRolesGuard)
   @UseGuards(OwnerUserGuard)
   @UseGuards(JwtAuthGuard)
