@@ -16,6 +16,7 @@ import { UpdateTopicDto } from './dtos/update-topic.dto';
 import { SearchValueDto } from './dtos/search-value.dto';
 import { Topic } from './topic.schema';
 import { TopicsService } from './topics.service';
+import { TopicUniqueGuard } from './guards/topic-unique.guard';
 
 @Controller('topics')
 export class TopicsController {
@@ -73,12 +74,14 @@ export class TopicsController {
     return await this.topicsService.findTopicReplies(id);
   }
 
+  @UseGuards(TopicUniqueGuard)
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() createTopicDto: CreateTopicDto): Promise<Topic> {
     return await this.topicsService.create(createTopicDto);
   }
 
+  @UseGuards(TopicUniqueGuard)
   @UseGuards(OwnerGuard)
   @UseGuards(JwtAuthGuard)
   @Patch(':id')

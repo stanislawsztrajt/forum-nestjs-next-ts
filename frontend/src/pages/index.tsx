@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { GetServerSideProps, NextPage } from 'next';
 import axios from 'axios';
 import Image from 'next/image';
@@ -48,7 +48,7 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
           </div>
           <br />
           <Image
-            className="w-11/12 xl:w-1/2 animate__animated animate__fa deInRight"
+            className="w-11/12 xl:w-1/2 animate__animated animate__fadeInRight"
             src={UndrawContentCreator}
           />
         </div>

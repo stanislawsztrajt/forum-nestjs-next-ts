@@ -7,3 +7,8 @@ export interface Itopic {
   updatedAt: string;
   _id: string;
 }
+
+export interface IcraeteTopicForm {
+  title: string;
+  body: string;
+}

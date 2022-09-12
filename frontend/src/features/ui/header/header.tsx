@@ -27,7 +27,7 @@ const Header: FC = () => {
           <Link href="/about">About</Link>
         </li>
         <li className="ml-4 hover:text-indigo-600">
-          <Link href="dashboard">Nothing</Link>
+          <Link href="/create-topic">Create topic</Link>
         </li>
       </ul>
 
