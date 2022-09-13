@@ -16,7 +16,7 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
         data-aos={`${index && index % 2 === 0 ? 'fade-left' : 'fade-right'}`}
         className="w-11/12 p-6 mt-4 text-center border border-gray-800 rounded-lg shadow-lg cursor-pointer xl:w-1/2 hover:text-indigo-800 hover:border-indigo-600"
       >
-        <h3 className='text-left absolute text-lg'>
+        <h3 className='absolute text-lg text-left'>
           Topic
         </h3>
         <div className="-mb-1">{owner?.username}</div>

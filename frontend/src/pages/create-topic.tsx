@@ -1,7 +1,8 @@
 import { CreateTopicForm } from 'features/topics';
-import React, { FC } from 'react';
+import { NextPage } from 'next';
+import React from 'react';
 
-const CraeteTopic: FC = () => {
+const CraeteTopic: NextPage = () => {
   return (
     <main className='flex justify-center mt-24 xl:mt-48'>
       <CreateTopicForm />

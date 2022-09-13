@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
+import React from 'react';
 import UndrawSecureLogin from 'assets/undraw/undraw_secure_login.svg';
 import Link from 'next/link';
 import { Field, Form, Formik } from 'formik';
 import useLogin from 'features/auth/login/use-login';
 import { Loading } from 'features/ui';
+import { NextPage } from 'next';
 
-const Login: FC = () => {
+const Login: NextPage = () => {
   const { initialValues, validationSchema, login, error, loading } = useLogin();
 
   return (

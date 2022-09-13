@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
+import React from 'react';
 import UndrawNotFound from 'assets/undraw/undraw_page_not_found.svg';
+import { NextPage } from 'next';
 
-const NotFound: FC = () => {
+const NotFound: NextPage = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-36">
       <h1 className="text-5xl">Page not found</h1>

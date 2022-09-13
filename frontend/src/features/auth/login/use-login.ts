@@ -43,7 +43,7 @@ const useLogin = () => {
       const expires = isRemember ? 999999999999999 : 7;
 
       Cookies.set('jwt', data.jwt, { expires });
-      Cookies.set('user', data.jwt, { expires });
+      Cookies.set('user', JSON.stringify(data.user), { expires });
 
       router.push('/dashboard');
     } catch (err) {

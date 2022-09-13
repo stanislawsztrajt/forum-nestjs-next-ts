@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
+import React from 'react';
 import UndrawCreate from 'assets/undraw/undraw_create.svg';
 import Link from 'next/link';
 import { Field, Form, Formik } from 'formik';
 import useRegister from 'features/auth/register/use-register';
 import { Loading } from 'features/ui';
+import { NextPage } from 'next';
 
-const Register: FC = () => {
+const Register: NextPage = () => {
   const { initialValues, validationSchema, login, error, loading } = useRegister();
 
   return (
