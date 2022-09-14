@@ -9,32 +9,36 @@ import React from 'react';
 import { user } from 'utils/constants/user';
 
 const Dashboard: NextPage = () => {
-  const userTopics = useQuery(['userTopics'], () => axios.get(`${process.env.NEXT_PUBLIC_API_URL}/topics/user/${user?._id}`))
-  const userReplies = useQuery(['userReplies'], () => axios.get(`${process.env.NEXT_PUBLIC_API_URL}/replies/user/${user?._id}`))
+  const userTopics = useQuery(['userTopics'], () =>
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/topics/user/${user?._id}`)
+  );
+  const userReplies = useQuery(['userReplies'], () =>
+    axios.get(`${process.env.NEXT_PUBLIC_API_URL}/replies/user/${user?._id}`)
+  );
 
   if (userTopics.isLoading || userReplies.isLoading) {
-    return <Loading />
+    return <Loading />;
   }
 
   if (userTopics.error || userReplies.error) {
-    return <>Something went wrong</>
+    return <>Something went wrong</>;
   }
 
-  const topics: Itopic[] = userTopics.data?.data
-  const replies: Itopic[] = userReplies.data?.data
+  const topics: Itopic[] = userTopics.data?.data;
+  const replies: Itopic[] = userReplies.data?.data;
 
   return (
-    <main className='flex flex-row gap-20 mt-12'>
-      <section className='w-full'>
-        <div className='flex flex-col items-end'>
-          <h2 className='text-5xl'>Topics</h2>
-          <TopicList topics={topics} owners={[user]}/>
+    <main className="flex flex-col gap-20 mt-12 lg:flex-row">
+      <section className="w-full">
+        <div className="flex flex-col items-center lg:items-end">
+          <h2 className="text-5xl">Topics</h2>
+          <TopicList topics={topics} owners={[user]} />
         </div>
       </section>
-      <section className='w-full'>
-        <h2 className='text-5xl'>Replies</h2>
-        <div className='flex flex-col items-start'>
-          <ReplyList replies={replies} owners={[user]}/>
+      <section className="w-full">
+        <h2 className="text-5xl text-center lg:text-left">Replies</h2>
+        <div className="flex flex-col items-center lg:items-start">
+          <ReplyList replies={replies} owners={[user]} />
         </div>
       </section>
     </main>

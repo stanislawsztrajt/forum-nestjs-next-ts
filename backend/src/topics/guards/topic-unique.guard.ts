@@ -13,16 +13,17 @@ import { TopicsService } from '../topics.service';
 export class TopicUniqueGuard implements CanActivate {
   constructor(private readonly topicsService: TopicsService) {}
 
-  async canActivate(
-    context: ExecutionContext,
-  ): Promise<boolean> {
-    const { body }: Irequest<Topic> = context
-      .switchToHttp()
-      .getRequest();
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const { body }: Irequest<Topic> = context.switchToHttp().getRequest();
 
-    const title = await this.topicsService.findOneByQuery({ title: { $eq: body.title } })
+    const title = await this.topicsService.findOneByQuery({
+      title: { $eq: body.title },
+    });
     if (title) {
-      throw new HttpException('Title already exist', HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new HttpException(
+        'Title already exist',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
 
     return true;

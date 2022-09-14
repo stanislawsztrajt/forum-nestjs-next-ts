@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { jwt } from "utils/constants/user";
+import { useEffect, useState } from 'react';
+import { jwt } from 'utils/constants/user';
 
 const useIsLoggedIn = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
-  useEffect(() => setIsLoggedIn(jwt ? true : false), [])
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  useEffect(() => setIsLoggedIn(jwt ? true : false), []);
 
   return {
-    isLoggedIn
-  }
+    isLoggedIn,
+  };
 };
 
 export default useIsLoggedIn;

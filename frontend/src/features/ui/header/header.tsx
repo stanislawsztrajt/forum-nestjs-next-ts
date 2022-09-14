@@ -7,7 +7,7 @@ import { Button } from 'features/ui';
 import useIsLoggedIn from 'features/auth/login/use-is-logged-in';
 
 const Header: FC = () => {
-  const { isLoggedIn } = useIsLoggedIn()
+  const { isLoggedIn } = useIsLoggedIn();
 
   return (
     <header className="flex flex-row flex-wrap items-center justify-around p-4 animate__animated animate__fadeInDown">
@@ -31,8 +31,12 @@ const Header: FC = () => {
         </li>
       </ul>
 
-      <div className="flex flex-row">
-        <Button text={isLoggedIn ? 'Dadhboard' : 'Login'} href="/auth/login" bg={true} />
+      <div className="flex flex-row flex-wrap justify-center gap-2">
+        <Button
+          text={isLoggedIn ? 'Dashboard' : 'Login'}
+          href={isLoggedIn ? '/dashboard' : '/auth/login'}
+          bg={true}
+        />
         <TopicsSearchInput isHeader={true} />
       </div>
     </header>

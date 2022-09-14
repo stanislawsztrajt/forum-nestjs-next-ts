@@ -13,21 +13,27 @@ import { UsersService } from '../users.service';
 export class UserUniqueGuard implements CanActivate {
   constructor(private readonly usersService: UsersService) {}
 
-  async canActivate(
-    context: ExecutionContext,
-  ): Promise<boolean> {
-    const { body }: Irequest<Iuser> = context
-      .switchToHttp()
-      .getRequest();
+  async canActivate(context: ExecutionContext): Promise<boolean> {
+    const { body }: Irequest<Iuser> = context.switchToHttp().getRequest();
 
-    const username = await this.usersService.findOneByQuery({ username: { $eq: body.username } })
+    const username = await this.usersService.findOneByQuery({
+      username: { $eq: body.username },
+    });
     if (username) {
-      throw new HttpException('Username already exist', HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new HttpException(
+        'Username already exist',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
 
-    const email = await this.usersService.findOneByQuery({ email: { $eq: body.email } })
+    const email = await this.usersService.findOneByQuery({
+      email: { $eq: body.email },
+    });
     if (email) {
-      throw new HttpException('Email already exist', HttpStatus.UNPROCESSABLE_ENTITY);
+      throw new HttpException(
+        'Email already exist',
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
     }
 
     return true;

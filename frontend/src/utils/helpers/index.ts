@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IpublicUser } from 'features/users/types';
+import { IpublicUser, USERS_ROLES } from 'features/users/types';
 import { jwt } from 'utils/constants/user';
 import { Iresponse } from 'utils/types/api';
 
@@ -18,6 +18,8 @@ export const getUsersFromOwnersIdsAsync: TgetUsersFromOwnerIds = async (array) =
 export const scrollToElementById = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
+
+export const checkIsUserIsAdmin = (user: IpublicUser) => user.roles.includes(USERS_ROLES.ADMIN)
 
 export const guardRoutes = (path: string, routerPush: (url: string) => Promise<boolean>) => {
   switch (path) {

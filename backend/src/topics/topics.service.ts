@@ -26,7 +26,9 @@ export class TopicsService {
   }
 
   async findTopicReplies(id: string): Promise<Reply[]> {
-    return await this.replyModel.find({ topicId: { $eq: id } }).sort({ _id: -1 });
+    return await this.replyModel
+      .find({ topicId: { $eq: id } })
+      .sort({ _id: -1 });
   }
 
   async findOneById(id: string): Promise<Topic> {

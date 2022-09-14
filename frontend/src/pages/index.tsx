@@ -17,7 +17,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
-  const { isLoggedIn } = useIsLoggedIn()
+  const { isLoggedIn } = useIsLoggedIn();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [topics, setTopics] = useState<Itopic[]>(topicsData);

@@ -1,8 +1,7 @@
-import CreateTopicForm from './create-topic-form'
-import TopicItem from './topic-item'
-import TopicList from './topic-list'
-import TopicsSearchInput from './topics-search-input'
-import Types from './types'
+import CreateTopicForm from './create-topic-form';
+import TopicItem from './topic-item';
+import TopicList from './topic-list';
+import TopicsSearchInput from './topics-search-input';
+import Types from './types';
 
-export { CreateTopicForm, TopicItem, TopicList, TopicsSearchInput, Types }
-    
+export { CreateTopicForm, TopicItem, TopicList, TopicsSearchInput, Types };

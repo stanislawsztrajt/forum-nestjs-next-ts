@@ -15,4 +15,10 @@ export interface IpublicUser {
   username: string;
   updatedAt: Date;
   createdAt: Date;
+  roles: string[];
+}
+
+export enum USERS_ROLES {
+  ADMIN = "Admin",
+  USER = "User"
 }

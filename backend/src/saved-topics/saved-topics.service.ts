@@ -26,7 +26,9 @@ export class SavedTopicsService {
       (savedTopic) => new Types.ObjectId(savedTopic.topicId),
     );
 
-    return this.topicModel.find({ _id: { $in: savedTopicsIds } }).sort({ _id: -1 });
+    return this.topicModel
+      .find({ _id: { $in: savedTopicsIds } })
+      .sort({ _id: -1 });
   }
 
   async findAllByQuery(query: FilterQuery<SavedTopic>): Promise<SavedTopic[]> {

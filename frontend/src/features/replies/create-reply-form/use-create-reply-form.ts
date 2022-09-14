@@ -1,11 +1,10 @@
-import axios from "axios";
-import { IcreateReplyForm } from "features/replies/types";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { authBearer } from "utils/constants/user";
-import { Ierror } from "utils/types/api";
-import * as Yup from 'yup'
-
+import axios from 'axios';
+import { IcreateReplyForm } from 'features/replies/types';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { authBearer } from 'utils/constants/user';
+import { Ierror } from 'utils/types/api';
+import * as Yup from 'yup';
 
 const initialValues: IcreateReplyForm = {
   body: '',
@@ -19,23 +18,27 @@ const validationSchema = Yup.object({
 });
 
 const useCreateReplyForm = (topicId: string) => {
-  const router = useRouter()
+  const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const createReply = async (values: IcreateReplyForm) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/replies`, { ...values, topicId }, authBearer)
-      router.reload()
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/replies`,
+        { ...values, topicId },
+        authBearer
+      );
+      router.reload();
     } catch (err) {
       const { response } = err as Ierror;
-      setError(response.data.message)
+      setError(response.data.message);
     }
-    setLoading(false)
-  }
-  
-  return { initialValues, validationSchema, createReply, error, loading }
-}
+    setLoading(false);
+  };
 
-export default useCreateReplyForm
+  return { initialValues, validationSchema, createReply, error, loading };
+};
+
+export default useCreateReplyForm;

@@ -1,1 +1,1 @@
-export { default } from "./create-topic-form"
+export { default } from './create-topic-form';
