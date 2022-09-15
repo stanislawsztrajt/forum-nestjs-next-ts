@@ -3,15 +3,19 @@ import { Field, Form, Formik } from 'formik';
 import React, { FC } from 'react';
 import useCreateTopicForm from './use-create-topic-form';
 
-const CreateTopicForm: FC = () => {
-  const { initialValues, validationSchema, createReply, error, loading } = useCreateTopicForm();
+interface Props {
+  _id?: string;
+}
+
+const CreateTopicForm: FC<Props> = ({ _id }) => {
+  const { initialValues, validationSchema, createTopic, error, loading } = useCreateTopicForm(_id);
 
   return (
     <div className="w-11/12 xl:w-1/2">
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={(values) => createReply(values)}
+        onSubmit={(values) => createTopic(values)}
       >
         {({ errors, touched }) => (
           <>
@@ -19,8 +23,8 @@ const CreateTopicForm: FC = () => {
               <Loading />
             ) : (
               <Form>
-                <div className="w-full flex flex-col items-center">
-                  <h4 className="text-2xl mb-2">Create topic form</h4>
+                <div className="flex flex-col items-center w-full">
+                  <h4 className="mb-2 text-2xl">Create topic form</h4>
                   <Field
                     type="text"
                     placeholder="Title, I have problem with..."
@@ -30,7 +34,7 @@ const CreateTopicForm: FC = () => {
                     className="input-underline"
                   />
                   {errors.title && touched.title ? (
-                    <div className="text-red-500 mt-2">{errors.title}</div>
+                    <div className="mt-2 text-red-500">{errors.title}</div>
                   ) : null}
                   <Field
                     as="textarea"
@@ -39,12 +43,12 @@ const CreateTopicForm: FC = () => {
                     name="body"
                     maxLength={3000}
                     required
-                    className="input-underline h-48 border-2 rounded-md max-h-96 p-10 mt-8"
+                    className="h-48 p-10 mt-8 border-2 rounded-md input-underline max-h-96"
                   />
                   {errors.body && touched.body ? (
-                    <div className="text-red-500 mt-2">{errors.body}</div>
+                    <div className="mt-2 text-red-500">{errors.body}</div>
                   ) : null}
-                  {error ? <div className="text-red-500 mt-2">{error}</div> : null}
+                  {error ? <div className="mt-2 text-red-500">{error}</div> : null}
                   <Button bg text="Create Reply" className="w-64 mt-4" />
                 </div>
               </Form>

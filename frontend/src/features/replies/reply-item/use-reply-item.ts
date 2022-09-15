@@ -6,6 +6,7 @@ import { authBearer } from 'utils/constants/user';
 const useReplyItem = () => {
   const router = useRouter();
   const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [isUpdateModal, setIsUpdateModal] = useState(false);
 
   const deleteReply = async (id: string) => {
     await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/replies/${id}`, authBearer);
@@ -15,6 +16,8 @@ const useReplyItem = () => {
   return {
     isDeleteModal,
     setIsDeleteModal,
+    isUpdateModal,
+    setIsUpdateModal,
     deleteReply,
   };
 };

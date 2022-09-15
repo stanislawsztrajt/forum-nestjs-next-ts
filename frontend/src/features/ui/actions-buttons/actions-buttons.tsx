@@ -3,18 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
-  showModal: () => void;
+  showDeleteModal: () => void;
+  showUpdateModal: () => void;
 }
 
-const ActionsButtons: FC<Props> = ({ showModal }) => {
+const ActionsButtons: FC<Props> = ({ showDeleteModal, showUpdateModal }) => {
   return (
     <>
       <FontAwesomeIcon
-        onClick={showModal}
+        onClick={showDeleteModal}
         icon={faTrash}
         className="p-2 text-xl text-red-600 duration-100 cursor-pointer hover:text-red-700"
       />
       <FontAwesomeIcon
+        onClick={showUpdateModal}
         icon={faEdit}
         className="p-2 text-xl text-blue-600 duration-100 cursor-pointer hover:text-blue-700"
       />

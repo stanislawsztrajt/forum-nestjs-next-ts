@@ -6,6 +6,7 @@ import { authBearer } from 'utils/constants/user';
 const useTopicItem = () => {
   const router = useRouter();
   const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [isUpdateModal, setIsUpdateModal] = useState(false);
 
   const deleteTopic = async (id: string) => {
     await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/topics/${id}`, authBearer);
@@ -15,6 +16,8 @@ const useTopicItem = () => {
   return {
     isDeleteModal,
     setIsDeleteModal,
+    isUpdateModal,
+    setIsUpdateModal,
     deleteTopic,
   };
 };

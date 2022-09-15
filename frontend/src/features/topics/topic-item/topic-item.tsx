@@ -1,9 +1,9 @@
 import { ActionsButtons, ConfirmationModal } from 'features/ui';
-import { IpublicUser } from 'features/users/types';
+import { IpublicUser, USERS_ROLES } from 'features/users/types';
 import Link from 'next/link';
 import React, { FC } from 'react';
-import { user } from 'utils/constants/user';
-import { checkIsUserIsAdmin } from 'utils/helpers';
+import useCheckUserRoles from 'utils/hooks/use-check-user-roles';
+import useGetUser from 'utils/hooks/use-get-user';
 import { Itopic } from '../types';
 import useTopicItem from './use-topic-item';
 
@@ -14,11 +14,21 @@ interface Props {
 }
 
 const TopicItem: FC<Props> = ({ topic, owner, index }) => {
-  const { isDeleteModal, setIsDeleteModal, deleteTopic } = useTopicItem();
+  const { isDeleteModal, setIsDeleteModal, isUpdateModal, setIsUpdateModal, deleteTopic } =
+    useTopicItem();
+  const isUserIsAdmin = useCheckUserRoles([USERS_ROLES.ADMIN]);
+  const user = useGetUser();
 
   return (
     <>
       {isDeleteModal ? (
+        <ConfirmationModal
+          cancelAction={() => setIsDeleteModal(false)}
+          action={() => deleteTopic(topic._id)}
+        />
+      ) : null}
+
+      {isUpdateModal ? (
         <ConfirmationModal
           cancelAction={() => setIsDeleteModal(false)}
           action={() => deleteTopic(topic._id)}
@@ -39,14 +49,14 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
           <div className="z-10 flex flex-row justify-end w-full -mb-3">
             <Link href="">
               <div>
-                {
-                  topic.ownerId === user._id || checkIsUserIsAdmin(user)
-                  ? (
-                    <div className="flex flex-row justify-end w-full -mb-3">
-                      <ActionsButtons showModal={() => setIsDeleteModal(true)} />
-                    </div>
-                  ) : null
-                }
+                {topic.ownerId === user._id || isUserIsAdmin ? (
+                  <div className="flex flex-row justify-end w-full -mb-3">
+                    <ActionsButtons
+                      showDeleteModal={() => setIsDeleteModal(true)}
+                      showUpdateModal={() => setIsUpdateModal(true)}
+                    />
+                  </div>
+                ) : null}
               </div>
             </Link>
           </div>

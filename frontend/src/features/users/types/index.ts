@@ -19,6 +19,6 @@ export interface IpublicUser {
 }
 
 export enum USERS_ROLES {
-  ADMIN = "Admin",
-  USER = "User"
+  ADMIN = 'Admin',
+  USER = 'User',
 }
