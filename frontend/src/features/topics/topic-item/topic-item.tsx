@@ -1,11 +1,15 @@
-import { ActionsButtons, ConfirmationModal } from 'features/ui';
-import { IpublicUser, USERS_ROLES } from 'features/users/types';
 import Link from 'next/link';
 import React, { FC } from 'react';
+
+import { IpublicUser, USERS_ROLES } from 'features/users/types';
+import { Itopic } from '../types';
+
+import { ActionsButtons, ConfirmationModal, Modal } from 'features/ui';
+
 import useCheckUserRoles from 'utils/hooks/use-check-user-roles';
 import useGetUser from 'utils/hooks/use-get-user';
-import { Itopic } from '../types';
 import useTopicItem from './use-topic-item';
+import { CreateTopicForm } from 'features/topics';
 
 interface Props {
   topic: Itopic;
@@ -22,17 +26,15 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
   return (
     <>
       {isDeleteModal ? (
-        <ConfirmationModal
-          cancelAction={() => setIsDeleteModal(false)}
-          action={() => deleteTopic(topic._id)}
-        />
+        <Modal cancelAction={() => setIsDeleteModal(false)}>
+          <ConfirmationModal action={() => deleteTopic(topic._id)} />
+        </Modal>
       ) : null}
 
       {isUpdateModal ? (
-        <ConfirmationModal
-          cancelAction={() => setIsDeleteModal(false)}
-          action={() => deleteTopic(topic._id)}
-        />
+        <Modal cancelAction={() => setIsUpdateModal(false)}>
+          <CreateTopicForm topic={topic} />
+        </Modal>
       ) : null}
 
       <Link href={`/topics/${topic.slug}`}>

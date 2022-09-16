@@ -1,10 +1,13 @@
 import React, { FC } from 'react';
+
 import { Ireply } from 'features/replies/types';
 import { IpublicUser, USERS_ROLES } from 'features/users/types';
-import { ActionsButtons, ConfirmationModal } from 'features/ui';
-import useReplyItem from './use-reply-item';
-import useGetUser from 'utils/hooks/use-get-user';
+import { ActionsButtons, ConfirmationModal, Modal } from 'features/ui';
+
 import useCheckUserRoles from 'utils/hooks/use-check-user-roles';
+import useGetUser from 'utils/hooks/use-get-user';
+import useReplyItem from './use-reply-item';
+import CreateReplyForm from '../create-reply-form';
 
 interface Props {
   reply: Ireply;
@@ -21,16 +24,14 @@ const ReplyItem: FC<Props> = ({ reply, owner, index }) => {
   return (
     <>
       {isDeleteModal ? (
-        <ConfirmationModal
-          cancelAction={() => setIsDeleteModal(false)}
-          action={() => deleteReply(reply._id)}
-        />
+        <Modal cancelAction={() => setIsDeleteModal(false)}>
+          <ConfirmationModal action={() => deleteReply(reply._id)} />
+        </Modal>
       ) : null}
       {isUpdateModal ? (
-        <ConfirmationModal
-          cancelAction={() => setIsDeleteModal(false)}
-          action={() => deleteReply(reply._id)}
-        />
+        <Modal cancelAction={() => setIsUpdateModal(false)}>
+          <CreateReplyForm topicId={reply.topicId} reply={reply} />
+        </Modal>
       ) : null}
 
       <div

@@ -6,8 +6,10 @@ import { Topic } from '../topic.schema';
 @Injectable()
 export class GenerateSlugMiddleware implements NestMiddleware {
   use(req: Irequest<Topic>, res: Response, next: NextFunction) {
-    req.body.slug = req.body.title.split(' ').join('-');
-
+    req.body.slug = req.body.title
+      .replaceAll(/[^\w\s]/gi, '')
+      .split(' ')
+      .join('-');
     next();
   }
 }

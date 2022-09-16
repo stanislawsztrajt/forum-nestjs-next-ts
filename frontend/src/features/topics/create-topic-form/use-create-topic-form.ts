@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { authBearer } from 'utils/constants/user';
-import { Ierror, Iresponse } from 'utils/types/api';
+import { Ierror } from 'utils/types/api';
 import * as Yup from 'yup';
 import { IcraeteTopicForm, Itopic } from '../types';
 
@@ -22,32 +22,31 @@ const validationSchema = Yup.object({
     .required('Required'),
 });
 
-const useCreateTopicForm = (_id?: string) => {
+const useCreateTopicForm = (topic?: Itopic) => {
   const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!_id) return;
-
-    const fetchData = async () => {
-      const { data }: Iresponse<Itopic> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/topics/${_id}`
-      );
-      initialValues.title = data.title;
-      initialValues.body = data.body;
-    };
-    fetchData();
-  }, []);
+  if (topic?._id) {
+    initialValues.title = topic.title;
+    initialValues.body = topic.body;
+  }
 
   const createTopic = async (values: IcraeteTopicForm) => {
     setLoading(true);
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/topics${_id ? `/${_id}` : ''}`,
-        values,
-        authBearer
-      );
+      if (topic) {
+        // update topic
+        await axios.patch(
+          `${process.env.NEXT_PUBLIC_API_URL}/topics${topic?._id ? `/${topic._id}` : ''}`,
+          values,
+          authBearer
+        );
+      } else {
+        // create topic
+        await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/topics`, values, authBearer);
+      }
+
       router.push('/dashboard');
     } catch (err) {
       const { response } = err as Ierror;

@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { IcreateReplyForm, Ireply } from 'features/replies/types';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { authBearer } from 'utils/constants/user';
-import { Ierror, Iresponse } from 'utils/types/api';
+import { Ierror } from 'utils/types/api';
 import * as Yup from 'yup';
 
 const initialValues: IcreateReplyForm = {
@@ -17,31 +17,34 @@ const validationSchema = Yup.object({
     .required('Required'),
 });
 
-const useCreateReplyForm = (topicId: string, _id?: string) => {
+const useCreateReplyForm = (topicId: string, reply?: Ireply) => {
   const router = useRouter();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!_id) return;
-
-    const fetchData = async () => {
-      const { data }: Iresponse<Ireply> = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/replies/${_id}`
-      );
-      initialValues.body = data.body;
-    };
-    fetchData();
-  }, []);
+  if (reply) {
+    initialValues.body = reply.body;
+  }
 
   const createReply = async (values: IcreateReplyForm) => {
     setLoading(true);
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/replies${_id ? `/${_id}` : ''}`,
-        { ...values, topicId },
-        authBearer
-      );
+      if (reply) {
+        // update reply
+        await axios.patch(
+          `${process.env.NEXT_PUBLIC_API_URL}/replies/${reply._id}`,
+          { ...values, topicId },
+          authBearer
+        );
+      } else {
+        // update reply
+        await axios.post(
+          `${process.env.NEXT_PUBLIC_API_URL}/replies`,
+          { ...values, topicId },
+          authBearer
+        );
+      }
+
       router.reload();
     } catch (err) {
       const { response } = err as Ierror;
