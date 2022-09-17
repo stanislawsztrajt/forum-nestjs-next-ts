@@ -5,7 +5,7 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
-import { Irequest } from 'src/utils/types';
+import { Irequest } from '../../utils/types';
 import { Topic } from '../topic.schema';
 import { TopicsService } from '../topics.service';
 

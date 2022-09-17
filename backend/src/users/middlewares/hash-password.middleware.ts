@@ -2,7 +2,7 @@ import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import * as bcrypt from 'bcrypt';
 import { Iuser } from '../types';
-import { saltOrRounds } from 'src/utils/constants/bcrypt';
+import { saltOrRounds } from '../../utils/constants/bcrypt';
 
 interface Irequest<T> extends Request {
   body: T;

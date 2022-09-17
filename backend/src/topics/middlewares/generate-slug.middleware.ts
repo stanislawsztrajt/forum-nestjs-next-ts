@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
-import { Irequest } from 'src/utils/types';
+import { Irequest } from '../../utils/types';
 import { Topic } from '../topic.schema';
 
 @Injectable()

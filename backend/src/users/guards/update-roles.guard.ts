@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
-import { checkIsUserIsAdmin, parseJwt } from 'src/utils/helpers';
-import { Irequest } from 'src/utils/types';
+import { checkIsUserIsAdmin, parseJwt } from '../../utils/helpers';
+import { Irequest } from '../../utils/types';
 import { Iuser } from '../types';
 
 @Injectable()
