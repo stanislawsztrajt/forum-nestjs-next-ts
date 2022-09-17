@@ -4,10 +4,10 @@ import { SavedTopicsController } from './saved-topics.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { SavedTopic, SavedTopicSchema } from './saved-topic.schema';
 import { JwtService } from '@nestjs/jwt';
-import { SetCreatedAtMiddleware } from 'src/middlewares/set-created-at-date.middleware';
-import { SetUpdatedAtMiddleware } from 'src/middlewares/set-updated-at-date.middleware';
-import { SetOwnerIdMiddleware } from 'src/middlewares/set-owner-id.middleware';
-import { Topic, TopicSchema } from 'src/topics/topic.schema';
+import { SetCreatedAtMiddleware } from '../middlewares/set-created-at-date.middleware';
+import { SetUpdatedAtMiddleware } from '../middlewares/set-updated-at-date.middleware';
+import { SetOwnerIdMiddleware } from '../middlewares/set-owner-id.middleware';
+import { Topic, TopicSchema } from '../topics/topic.schema';
 
 @Module({
   imports: [

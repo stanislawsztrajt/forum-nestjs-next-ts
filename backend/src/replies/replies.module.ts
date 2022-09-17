@@ -4,9 +4,9 @@ import { RepliesController } from './replies.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Reply, ReplySchema } from './reply.schema';
 import { JwtService } from '@nestjs/jwt';
-import { SetCreatedAtMiddleware } from 'src/middlewares/set-created-at-date.middleware';
-import { SetUpdatedAtMiddleware } from 'src/middlewares/set-updated-at-date.middleware';
-import { SetOwnerIdMiddleware } from 'src/middlewares/set-owner-id.middleware';
+import { SetCreatedAtMiddleware } from '../middlewares/set-created-at-date.middleware';
+import { SetUpdatedAtMiddleware } from '../middlewares/set-updated-at-date.middleware';
+import { SetOwnerIdMiddleware } from '../middlewares/set-owner-id.middleware';
 
 @Module({
   imports: [

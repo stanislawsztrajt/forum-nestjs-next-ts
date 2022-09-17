@@ -8,11 +8,11 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { OwnerGuard } from 'src/auth/guards/owner.guard';
+import { OwnerGuard } from '../auth/guards/owner.guard';
 import { CreateSavedTopicDto } from './dtos/create-saved-topic.dto';
 import { SavedTopic } from './saved-topic.schema';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { Topic } from 'src/topics/topic.schema';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Topic } from '../topics/topic.schema';
 
 @Controller('saved-topics')
 export class SavedTopicsController {

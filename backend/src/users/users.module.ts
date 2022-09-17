@@ -9,10 +9,10 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './user.schema';
 import { HashPassword } from './middlewares/hash-password.middleware';
-import { SetCreatedAtMiddleware } from 'src/middlewares/set-created-at-date.middleware';
+import { SetCreatedAtMiddleware } from '../middlewares/set-created-at-date.middleware';
 import { JwtService } from '@nestjs/jwt';
 import { SetDefaultRoleMiddleware } from './middlewares/set-default-role.middleware';
-import { SetUpdatedAtMiddleware } from 'src/middlewares/set-updated-at-date.middleware';
+import { SetUpdatedAtMiddleware } from '../middlewares/set-updated-at-date.middleware';
 
 @Module({
   imports: [

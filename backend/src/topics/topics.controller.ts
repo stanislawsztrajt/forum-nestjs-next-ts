@@ -8,9 +8,9 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { OwnerGuard } from 'src/auth/guards/owner.guard';
-import { Reply } from 'src/replies/reply.schema';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { OwnerGuard } from '../auth/guards/owner.guard';
+import { Reply } from '../replies/reply.schema';
 import { CreateTopicDto } from './dtos/create-topic.dto';
 import { UpdateTopicDto } from './dtos/update-topic.dto';
 import { SearchValueDto } from './dtos/search-value.dto';

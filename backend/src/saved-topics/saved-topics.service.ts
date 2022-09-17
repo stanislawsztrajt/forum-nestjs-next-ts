@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model, Types } from 'mongoose';
-import { Topic, TopicDocument } from 'src/topics/topic.schema';
+import { Topic, TopicDocument } from '../topics/topic.schema';
 import { CreateSavedTopicDto } from './dtos/create-saved-topic.dto';
 import { SavedTopic, SavedTopicDocument } from './saved-topic.schema';
 
