@@ -1,8 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Observable } from 'rxjs';
-import { parseJwt } from 'src/utils/helpers';
-import { Irequest } from 'src/utils/types';
+import { parseJwt } from '../../utils/helpers';
+import { Irequest } from '../../utils/types';
 
 @Injectable()
 export class AuthenticationGuard implements CanActivate {

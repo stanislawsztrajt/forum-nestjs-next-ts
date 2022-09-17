@@ -8,10 +8,10 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { Types } from 'mongoose';
 import { Observable } from 'rxjs';
-import { Iuser } from 'src/users/types';
-import { checkIsUserIsAdmin, parseJwt } from 'src/utils/helpers';
-import { findOneByCollectionName } from 'src/utils/helpers/mongoose';
-import { Irequest, IrequestBodyId } from 'src/utils/types';
+import { Iuser } from '../../users/types';
+import { checkIsUserIsAdmin, parseJwt } from '../../utils/helpers';
+import { findOneByCollectionName } from '../../utils/helpers/mongoose';
+import { Irequest, IrequestBodyId } from '../../utils/types';
 
 @Injectable()
 export class OwnerGuard implements CanActivate {
