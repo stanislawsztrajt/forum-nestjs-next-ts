@@ -1,9 +1,9 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Response, NextFunction } from 'express';
-import { Iuser } from 'src/users/types';
-import { parseJwt } from 'src/utils/helpers';
-import { Irequest, IrequestBodyId } from 'src/utils/types';
+import { Iuser } from '../users/types';
+import { parseJwt } from '../utils/helpers';
+import { Irequest, IrequestBodyId } from '../utils/types';
 
 @Injectable()
 export class SetOwnerIdMiddleware implements NestMiddleware {

@@ -1,6 +1,6 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Response, NextFunction } from 'express';
-import { Irequest, IrequestBodyDates } from 'src/utils/types';
+import { Irequest, IrequestBodyDates } from '../utils/types';
 
 @Injectable()
 export class SetCreatedAtMiddleware implements NestMiddleware {
