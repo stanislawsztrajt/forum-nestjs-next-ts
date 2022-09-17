@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { Itopic } from '../types';
 import TopicItem from '../topic-item';
 import { IpublicUser } from 'features/users/types';
+import { SavedTopicsContext } from 'features/saved-topics/saved-topics-context';
 
 interface Props {
   topics: Itopic[];
@@ -17,7 +18,21 @@ const TopicList: FC<Props> = ({ topics, owners }) => {
       owner={owners.find((owner) => owner._id === topic.ownerId)}
     />
   ));
-  return <>{topics.length > 0 ? <>{topicList}</> : <>No topics {':('}</>}</>;
+  return (
+    <>
+      {
+        topics.length > 0 ? (
+          <SavedTopicsContext>
+            {topicList}
+          </SavedTopicsContext>
+        ) : (
+          <>
+            No topics {':('}
+          </>
+        )
+      }
+    </>
+  );
 };
 
 export default TopicList;

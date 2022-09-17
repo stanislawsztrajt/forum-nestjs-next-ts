@@ -48,10 +48,10 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
           </div>
           <br />
           <Image
-            loading='lazy'
+            loading="lazy"
             className="w-11/12 xl:w-1/2 animate__animated animate__fadeInRight"
             src={UndrawContentCreator}
-            alt='Image about forum'
+            alt="Image about forum"
           />
         </div>
       </section>

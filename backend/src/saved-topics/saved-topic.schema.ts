@@ -10,6 +10,12 @@ export class SavedTopic {
 
   @Prop({ required: true })
   ownerId: string;
+
+  @Prop({ required: true })
+  createdAt: Date;
+
+  @Prop({ required: true })
+  updatedAt: Date;
 }
 
 export const SavedTopicSchema = SchemaFactory.createForClass(SavedTopic);

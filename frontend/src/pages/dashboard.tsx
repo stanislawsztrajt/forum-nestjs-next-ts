@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { ReplyList } from 'features/replies';
+import { Ireply } from 'features/replies/types';
 import { TopicList } from 'features/topics';
 import { Itopic } from 'features/topics/types';
 import { Loading } from 'features/ui';
@@ -25,7 +26,7 @@ const Dashboard: NextPage = () => {
   }
 
   const topics: Itopic[] = userTopics.data?.data;
-  const replies: Itopic[] = userReplies.data?.data;
+  const replies: Ireply[] = userReplies.data?.data;
 
   return (
     <main className="flex flex-col gap-20 mt-12 lg:flex-row">

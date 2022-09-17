@@ -24,7 +24,7 @@ const CreateReplyForm: FC<Props> = ({ topicId, reply }) => {
       onSubmit={(values) => createReply(values)}
     >
       {({ errors, touched }) => (
-        <Form className='w-full'>
+        <Form className="w-full">
           <div className="flex flex-col items-center w-full">
             <h4 className="mb-2 text-2xl">{reply ? 'Update' : 'Create'} reply form</h4>
             <Field

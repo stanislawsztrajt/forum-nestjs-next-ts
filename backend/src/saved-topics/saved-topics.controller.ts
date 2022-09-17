@@ -24,7 +24,12 @@ export class SavedTopicsController {
   }
 
   @Get('user/:id')
-  async getUserSavedTopics(@Param('id') id: string): Promise<Topic[]> {
+  async getUserSavedTopics(@Param('id') id: string): Promise<SavedTopic[]> {
+    return await this.savedTopicsService.findAllByQuery({ ownerId: { $eq: id } });
+  }
+
+  @Get('topics/user/:id')
+  async getUserTopics(@Param('id') id: string): Promise<Topic[]> {
     return await this.savedTopicsService.findAllUserSavedTopics(id);
   }
 

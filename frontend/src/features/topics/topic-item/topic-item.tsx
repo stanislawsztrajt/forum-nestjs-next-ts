@@ -10,6 +10,8 @@ import useCheckUserRoles from 'utils/hooks/use-check-user-roles';
 import useGetUser from 'utils/hooks/use-get-user';
 import useTopicItem from './use-topic-item';
 import { CreateTopicForm } from 'features/topics';
+import SaveTopicButton from 'features/saved-topics/save-topic-button/save-topic-button';
+
 
 interface Props {
   topic: Itopic;
@@ -20,6 +22,7 @@ interface Props {
 const TopicItem: FC<Props> = ({ topic, owner, index }) => {
   const { isDeleteModal, setIsDeleteModal, isUpdateModal, setIsUpdateModal, deleteTopic } =
     useTopicItem();
+
   const isUserIsAdmin = useCheckUserRoles([USERS_ROLES.ADMIN]);
   const user = useGetUser();
 
@@ -48,19 +51,22 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
           <div className="-mt-1 font-light">{topic.createdAt.substring(0, 10)}</div>
 
           <p className="px-20 mt-2 text-lg">{topic.body}</p>
-          <div className="z-10 flex flex-row justify-end w-full -mb-3">
-            <Link href="">
-              <div>
-                {topic.ownerId === user._id || isUserIsAdmin ? (
-                  <div className="flex flex-row justify-end w-full -mb-3">
-                    <ActionsButtons
-                      showDeleteModal={() => setIsDeleteModal(true)}
-                      showUpdateModal={() => setIsUpdateModal(true)}
-                    />
-                  </div>
-                ) : null}
+          <div className="flex flex-row justify-end w-full -mb-3">
+            <Link href={''} scroll={false}>
+              <div className="flex flex-row justify-end w-full -mb-3">
+                { isUserIsAdmin ? (
+                  <>
+                    <SaveTopicButton topicId={topic._id} />
+                    { topic.ownerId === user._id ? (
+                      <ActionsButtons
+                        showDeleteModal={() => setIsDeleteModal(true)}
+                        showUpdateModal={() => setIsUpdateModal(true)}
+                      />
+                    ) : null}
+                  </>
+                ) : null }
               </div>
-            </Link>
+            </Link> 
           </div>
         </div>
       </Link>

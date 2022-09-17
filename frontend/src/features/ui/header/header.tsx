@@ -29,6 +29,11 @@ const Header: FC = () => {
         <li className="ml-4 hover:text-indigo-600">
           <Link href="/create-topic">Create topic</Link>
         </li>
+        {isLoggedIn ?
+          <li className="ml-4 hover:text-indigo-600">
+            <Link href="/saved-topics">Saved topics</Link>
+          </li>
+        : null}
       </ul>
 
       <div className="flex flex-row flex-wrap justify-center gap-2">
