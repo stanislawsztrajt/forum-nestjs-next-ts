@@ -15,7 +15,7 @@ interface Props {
   topicsData: Itopic[];
   topicsOwners: IpublicUser[];
 }
-
+//
 const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
   const { isLoggedIn } = useIsLoggedIn();
 
