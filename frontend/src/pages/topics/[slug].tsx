@@ -28,8 +28,10 @@ const Topic: NextPage<Props> = ({ topic, owner, replies, repliesOwners }: Props)
         </div>
       </section>
 
-      <section className="flex flex-col items-center w-full mt-16 ">
-        <CreateReplyForm topicId={topic._id} />
+      <section className="flex flex-col items-center mt-16">
+        <div className='w-full xl:w-1/2'>
+          <CreateReplyForm topicId={topic._id} />
+        </div>
       </section>
 
       <section className="flex flex-col items-center mt-20">
