@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
-import { Reply, ReplyDocument } from 'src/replies/reply.schema';
+import { Reply, ReplyDocument } from '../replies/reply.schema';
 import { CreateTopicDto } from './dtos/create-topic.dto';
 import { UpdateTopicDto } from './dtos/update-topic.dto';
 import { Topic, TopicDocument } from './topic.schema';
