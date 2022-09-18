@@ -11,6 +11,7 @@ import useGetUser from 'utils/hooks/use-get-user';
 import useTopicItem from './use-topic-item';
 import { CreateTopicForm } from 'features/topics';
 import SaveTopicButton from 'features/saved-topics/save-topic-button/save-topic-button';
+import useIsLoggedIn from 'features/auth/login/use-is-logged-in';
 
 
 interface Props {
@@ -25,6 +26,7 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
 
   const isUserIsAdmin = useCheckUserRoles([USERS_ROLES.ADMIN]);
   const user = useGetUser();
+  const { isLoggedIn } = useIsLoggedIn();
 
   return (
     <>
@@ -54,7 +56,7 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
           <div className="flex flex-row justify-end w-full -mb-3">
             <Link href={''} scroll={false}>
               <div className="flex flex-row justify-end w-full -mb-3">
-                { user ? (
+                { isLoggedIn ? (
                   <>
                     <SaveTopicButton topicId={topic._id} />
                     { topic.ownerId === user._id || isUserIsAdmin ? (
