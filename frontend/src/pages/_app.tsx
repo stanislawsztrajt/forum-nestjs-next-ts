@@ -19,8 +19,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    const path = router.route;
-    guardRoutes(path, router.push);
+    guardRoutes(window.location.pathname, router.push);
   }, [router.route]);
 
   return (
