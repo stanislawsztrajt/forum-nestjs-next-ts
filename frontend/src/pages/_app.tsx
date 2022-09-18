@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, []);
 
   useEffect(() => {
-    guardRoutes(window.location.pathname, router.push);
-  }, [router.route]);
+    guardRoutes(router.pathname, router.push);
+  }, [router.asPath]);
 
   return (
     <QueryClientProvider client={queryClient}>
