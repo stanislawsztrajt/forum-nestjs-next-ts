@@ -1,8 +1,8 @@
 {
   "version": 2,
   "env": {
-    "DATABASE_URL": "$DATABASE_URL",
-    "JWT_SECRET": "$JWT_SECRET"
+    "DATABASE_URL": "$forum_mongo_url",
+    "JWT_SECRET": "$jwt"
   },
   "builds": [
     {

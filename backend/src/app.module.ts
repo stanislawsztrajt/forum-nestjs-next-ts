@@ -9,6 +9,9 @@ import { SavedTopicsModule } from './saved-topics/saved-topics.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 @Module({
   imports: [
     ConfigModule.forRoot(),
