@@ -15,7 +15,7 @@ interface Props {
   topicsData: Itopic[];
   topicsOwners: IpublicUser[];
 }
-//
+
 const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
   const { isLoggedIn } = useIsLoggedIn();
 
@@ -35,7 +35,7 @@ const Home: NextPage<Props> = ({ topicsData, topicsOwners }: Props) => {
             <div className="">
               <Button
                 text="Check example topics"
-                className="mt-10"
+                className="mt-10 ml-4"
                 action={() => scrollToElementById('example-topics')}
               />
               <Button

@@ -11,7 +11,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
 
   app.enableCors({
-    origin: ['http://localhost:3001', 'https://forum-nestjs-next-ts.vercel.app'],
+    origin: '*',
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   });

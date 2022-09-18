@@ -46,6 +46,7 @@ const useLogin = () => {
       Cookies.set('user', JSON.stringify(data.user), { expires });
 
       router.push('/dashboard');
+      router.reload();
     } catch (err) {
       const { response } = err as Ierror;
       setError(response.data.message);

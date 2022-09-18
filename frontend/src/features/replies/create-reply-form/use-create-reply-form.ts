@@ -2,7 +2,7 @@ import axios from 'axios';
 import { IcreateReplyForm, Ireply } from 'features/replies/types';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { authBearer } from 'utils/constants/user';
+import { authBearer, jwt } from 'utils/constants/user';
 import { Ierror } from 'utils/types/api';
 import * as Yup from 'yup';
 
@@ -27,6 +27,8 @@ const useCreateReplyForm = (topicId: string, reply?: Ireply) => {
   }
 
   const createReply = async (values: IcreateReplyForm) => {
+    if (!jwt) return router.push('/auth/login')
+
     setLoading(true);
     try {
       if (reply) {

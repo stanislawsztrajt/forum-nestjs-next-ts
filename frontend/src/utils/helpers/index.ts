@@ -40,5 +40,11 @@ export const guardRoutes = (path: string, routerPush: (url: string) => Promise<b
       {
         if (!jwt) routerPush('/auth/login');
       }
+      break;
+    case '/create-topc':
+      {
+        if (!jwt) routerPush('/auth/login');
+      }
+      break;
   }
 };

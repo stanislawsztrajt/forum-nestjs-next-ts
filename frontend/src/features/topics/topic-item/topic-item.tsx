@@ -54,10 +54,10 @@ const TopicItem: FC<Props> = ({ topic, owner, index }) => {
           <div className="flex flex-row justify-end w-full -mb-3">
             <Link href={''} scroll={false}>
               <div className="flex flex-row justify-end w-full -mb-3">
-                { isUserIsAdmin ? (
+                { user ? (
                   <>
                     <SaveTopicButton topicId={topic._id} />
-                    { topic.ownerId === user._id ? (
+                    { topic.ownerId === user._id || isUserIsAdmin ? (
                       <ActionsButtons
                         showDeleteModal={() => setIsDeleteModal(true)}
                         showUpdateModal={() => setIsUpdateModal(true)}
