@@ -14,7 +14,7 @@ const Button: FC<Props> = ({ href, className, bg, action, text }) => {
     <>
       {href ? (
         <Link href={href}>
-          <button onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
+          <button type='button' onClick={action} className={`${bg ? 'button-bg' : 'button'} ${className}`}>
             {text}
           </button>
         </Link>

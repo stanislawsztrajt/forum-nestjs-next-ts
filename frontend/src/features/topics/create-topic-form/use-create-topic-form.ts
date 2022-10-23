@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { authBearer } from 'utils/constants/user';
+import { authBearer, jwt } from 'utils/constants/user';
 import { Ierror } from 'utils/types/api';
 import * as Yup from 'yup';
 import { IcraeteTopicForm, Itopic } from '../types';
@@ -33,6 +33,7 @@ const useCreateTopicForm = (topic?: Itopic) => {
   }
 
   const createTopic = async (values: IcraeteTopicForm) => {
+    if (!jwt) router.push('/auth/login')
     setLoading(true);
     try {
       if (topic) {
