@@ -19,6 +19,7 @@ const TopicsSearchInput: FC<Props> = ({ setTopics, setLoading, isHeader }) => {
         className="p-4 ml-6 mr-1 text-gray-800 duration-100 border border-gray-800 rounded-full rounded-r-none cursor-pointer hover:text-indigo-600 hover:border-indigo-600"
         icon={faSearch}
         onClick={() => searchTopics('Enter')}
+        data-testid="search-button"
       />
       <input
         type="text"
